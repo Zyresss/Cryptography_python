@@ -18,7 +18,7 @@ class cesar:
         plaintext = ""
         ciphertext = ciphertext.replace(" ", "")
         for char in ciphertext.upper():
-            if ord(char) <= (ord('A') + self.shift - 1):
+            if ord(char) < (ord('A') + self.shift):
                 plaintext += chr(ord(char) - self.shift + 26)
             else:
                 plaintext += chr(ord(char) - self.shift)
