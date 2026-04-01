@@ -1,7 +1,7 @@
 from alphabet.alphabet import AlphabetMap, ReverseAlphabetMap
 
 class cesar:
-    def __init__(self, shift):
+    def __init__(self, shift: int):
         self.shift = shift
 
     def encrypt(self, plaintext):

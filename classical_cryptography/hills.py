@@ -1,31 +1,30 @@
 from alphabet.alphabet import AlphabetMap, ReverseAlphabetMap
 
-
-class testing:
+class hills:
     def __init__(self, a: int, b: int, c: int, d: int):
         self.a = a
         self.b = b
         self.c = c
         self.d = d
 
-    def calculate_first_determinant(self, char1: str, char2: str) -> int:
+    def calculate_first_letter(self, char1: str, char2: str) -> int:
         x1 = AlphabetMap[char1]
         x2 = AlphabetMap[char2]
         return (self.a * x1 + self.b * x2) % 26
     
-    def calculate_second_determinant(self, char1: str, char2: str) -> int:
+    def calculate_second_letter(self, char1: str, char2: str) -> int:
         x1 = AlphabetMap[char1]
         x2 = AlphabetMap[char2]
         return (self.c * x1 + self.d * x2) % 26
-
+    
     def encrypt(self, plaintext):
         ciphertext = ""
-        plaintext = plaintext.replace(" ", "")
+        plaintext = plaintext.replace(" ", "").upper()
         for i in range(0, len(plaintext), 2):
             char1 = plaintext[i].upper()
             char2 = plaintext[i+1].upper() if i+1 < len(plaintext) else 'X'
-            ciphertext += ReverseAlphabetMap[self.calculate_first_determinant(char1, char2)]
-            ciphertext += ReverseAlphabetMap[self.calculate_second_determinant(char1, char2)]
+            ciphertext += ReverseAlphabetMap[self.calculate_first_letter(char1, char2)]
+            ciphertext += ReverseAlphabetMap[self.calculate_second_letter(char1, char2)]
         return ciphertext
     
     def matrice_inverse(self):
@@ -49,28 +48,5 @@ class testing:
             plaintext += ReverseAlphabetMap[(a_inv * x1 + b_inv * x2) % 26]
             plaintext += ReverseAlphabetMap[(c_inv * x1 + d_inv * x2) % 26]
         return plaintext
-    
-    # def decrypt(self, ciphertext):
-    #     plaintext = ""
-    #     ciphertext = ciphertext.replace(" ", "")
-    #     for char in ciphertext.upper():
-    #         if ord(char) < (ord('A') + self.shift):
-    #             plaintext += chr(ord(char) - self.shift + 26)
-    #         else:
-    #             plaintext += chr(ord(char) - self.shift)
-    #     return plaintext
-
-def main() :
-    print("This is a test file for the alphabet mapping")
-
-    testing1 = testing(5, 12, 15, 25)
-    plaintext = "rnnc"
-    print ("Plaintext: ", plaintext.upper())
-    ciphertext = testing1.encrypt(plaintext)
-    print ("Ciphertext: ", ciphertext)
-    a_inv, b_inv, c_inv, d_inv = testing1.matrice_inverse()
-    print("Matrice inverse: ", a_inv, b_inv, c_inv, d_inv)
-    decrypted_text = testing1.decrypt(ciphertext)
-    print("Decrypted text: ", decrypted_text)
-
-main()
+        
+        

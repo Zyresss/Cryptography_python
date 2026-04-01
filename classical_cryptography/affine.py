@@ -1,7 +1,7 @@
 from alphabet.alphabet import AlphabetMap, ReverseAlphabetMap
 
 class affine :
-    def __init__(self, a, b):
+    def __init__(self, a: int, b: int):
         self.a = a
         self.b = b
 
@@ -30,5 +30,5 @@ class affine :
                 plaintext += char
         return plaintext
     
-    
+
     
