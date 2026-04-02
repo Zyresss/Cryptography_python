@@ -2,8 +2,31 @@ from alphabet.alphabet import AlphabetMap, ReverseAlphabetMap
 
 class vigenere:
     def __init__(self, key: str):
-        self.key = key
+        self.key = key.upper()
 
+    def encrypt(self, plaintext):
+        ciphertext = ""
+        plaintext = plaintext.replace(" ", "").upper()
+        key_length = len(self.key)
+        for i in range(len(plaintext)):
+            char = plaintext[i]
+            key_char = self.key[i % key_length]
+            enc_char = (AlphabetMap[char] + AlphabetMap[key_char]) % 26
+            ciphertext += ReverseAlphabetMap[enc_char]
+        return ciphertext
+    
+    def decrypt(self, ciphertext):
+        plaintext = ""
+        ciphertext = ciphertext.replace(" ", "").upper()
+        key_length = len(self.key)
+        for i in range(len(ciphertext)):
+            char = ciphertext[i]
+            key_char = self.key[i % key_length]
+            dec_char = (AlphabetMap[char] - AlphabetMap[key_char]) % 26
+            plaintext += ReverseAlphabetMap[dec_char]
+        return plaintext
+
+        
 
 
 
